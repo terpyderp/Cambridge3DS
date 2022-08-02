@@ -34,7 +34,16 @@ function love.load()
 	-- import custom modules
 	initModules()
 
-	
+	touchButtons = {
+		{260, 60, 60, 60, 0, 1, 0, "ENTER", "return", "return"},
+		{260, 120, 60, 60, 1, 0, 0, "ESC", "escape", "escape"},
+		{260, 180, 60, 60, 1, 1, 0, "TAB", "tab", "tab"},
+
+		{0, 180, 60, 60, 0, .25, 1, "<", "left", "left"},
+		{60, 120, 60, 60, 0, .25, 1, "/\\", "up", "up"},
+		{60, 180, 60, 60, 0, .25, 1, "\\/", "down", "down"},
+		{120, 180, 60, 60, 0, .25, 1, ">", "right", "right"}
+	}
 end
 
 
@@ -66,10 +75,21 @@ end
 
 function love.draw(screen)
 	if screen == "bottom" then
-		love.graphics.setCanvas()
-		love.graphics.setFont(font_3x5_2)
+		if scene.title ~= "Game" then
+			love.graphics.setCanvas()
+			love.graphics.setFont(font_3x5_2)
+			-- love.graphics.setColor(1, 1, 1, 1)
+			-- love.graphics.printf("< > /\\ \\/", 0, 0, 635, "left")
+
+			for _, b in ipairs(touchButtons) do
+				love.graphics.setColor(b[5], b[6], b[7])
+				love.graphics.setLineWidth(2)
+				love.graphics.rectangle("line", b[1], b[2], b[3], b[4])
+				love.graphics.printf(b[8], b[1]+6, b[2]+2, b[3], "left")
+			end
+		end
+		
 		love.graphics.setColor(1, 1, 1, 1)
-		love.graphics.printf("< > /\\ \\/", 0, 0, 635, "left")
 
 	else
 		love.graphics.setCanvas(GLOBAL_CANVAS)
@@ -225,90 +245,51 @@ local directions = {
 	["r"] = "right",
 }
 
--- function love.joystickhat(joystick, hat, direction)
--- 	local input_pressed = nil
--- 	local has_hat = false
--- 	if
--- 		config.input and
--- 		config.input.joysticks and
--- 		config.input.joysticks[joystick:getName()] and
--- 		config.input.joysticks[joystick:getName()].hats and
--- 		config.input.joysticks[joystick:getName()].hats[hat]
--- 	then
--- 		if direction ~= "c" then
--- 			input_pressed = config.input.joysticks[joystick:getName()].hats[hat][direction]
--- 		end
--- 		has_hat = true
--- 	end
--- 	if input_pressed then
--- 		for i = 1, #direction do
--- 			local char = direction:sub(i, i)
--- 			local _, count = last_hat_direction:gsub(char, char)
--- 			if count == 0 then
--- 				scene:onInputPress({input=config.input.joysticks[joystick:getName()].hats[hat][char], type="joyhat", name=joystick:getName(), hat=hat, direction=char})
--- 			end
--- 		end
--- 		for i = 1, #last_hat_direction do
--- 			local char = last_hat_direction:sub(i, i)
--- 			local _, count = direction:gsub(char, char)
--- 			if count == 0 then
--- 				scene:onInputRelease({input=config.input.joysticks[joystick:getName()].hats[hat][char], type="joyhat", name=joystick:getName(), hat=hat, direction=char})
--- 			end
--- 		end
--- 		last_hat_direction = direction
--- 	elseif has_hat then
--- 		for i, direction in ipairs{"d", "l", "ld", "lu", "r", "rd", "ru", "u"} do
--- 			scene:onInputRelease({input=config.input.joysticks[joystick:getName()].hats[hat][direction], type="joyhat", name=joystick:getName(), hat=hat, direction=direction})
--- 		end
--- 		last_hat_direction = ""
--- 	elseif direction ~= "c" then
--- 		for i = 1, #direction do
--- 			local char = direction:sub(i, i)
--- 			local _, count = last_hat_direction:gsub(char, char)
--- 			if count == 0 then
--- 				scene:onInputPress({input=directions[char], type="joyhat", name=joystick:getName(), hat=hat, direction=char})
--- 			end
--- 		end
--- 		for i = 1, #last_hat_direction do
--- 			local char = last_hat_direction:sub(i, i)
--- 			local _, count = direction:gsub(char, char)
--- 			if count == 0 then
--- 				scene:onInputRelease({input=directions[char], type="joyhat", name=joystick:getName(), hat=hat, direction=char})
--- 			end
--- 		end
--- 		last_hat_direction = direction
--- 	else
--- 		for i, direction in ipairs{"d", "l", "ld", "lu", "r", "rd", "ru", "u"} do
--- 			scene:onInputRelease({input=nil, type="joyhat", name=joystick:getName(), hat=hat, direction=direction})
--- 		end
--- 		last_hat_direction = ""
--- 	end
--- end
-
 function love.wheelmoved(x, y)
 	scene:onInputPress({input=nil, type="wheel", x=x, y=y})
 end
 
 function love.touchpressed(id, x, y, dx, dy, pressure)
-	local scancode = "tab"
-	local key = "tab"
+	if scene.title == "Game" then
+		love.keypressed("escape", "escape")
+		love.keyreleased("escape", "escape")
 
-	local input_pressed = nil
-	if config.input and config.input.keys then
-		input_pressed = config.input.keys[scancode]
+	else
+		for _, b in ipairs(touchButtons) do
+			if x >= b[1] and y >= b[2] and x <= b[1]+b[3] and y <= b[2]+b[4] then
+				-- local scancode = b[10]
+				-- local key = b[9]
+
+				-- local input_pressed = nil
+				-- if config.input and config.input.keys then
+				-- 	input_pressed = config.input.keys[scancode]
+				-- end
+				-- scene:onInputPress({input=input_pressed, type="key", key=key, scancode=scancode})
+
+				love.keypressed(b[9], b[10])
+				break
+			end
+		end
+
 	end
-	scene:onInputPress({input=input_pressed, type="key", key=key, scancode=scancode})
 end
 
 function love.touchreleased(id, x, y, dx, dy, pressure)
-	local scancode = "tab"
-	local key = "tab"
+	-- local scancode = "tab"
+	-- local key = "tab"
 
-	local input_released = nil
-	if config.input and config.input.keys then
-		input_released = config.input.keys[scancode]
+	-- local input_released = nil
+	-- if config.input and config.input.keys then
+	-- 	input_released = config.input.keys[scancode]
+	-- end
+	-- scene:onInputRelease({input=input_released, type="key", key=key, scancode=scancode})
+
+	for _, b in ipairs(touchButtons) do
+		if x >= b[1] and y >= b[2] and x <= b[1]+b[3] and y <= b[2]+b[4] then
+			love.keyreleased(b[9], b[10])
+			break
+		end
 	end
-	scene:onInputRelease({input=input_released, type="key", key=key, scancode=scancode})
 end
 
 function love.focus(f)
