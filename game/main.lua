@@ -28,10 +28,13 @@ function love.load()
 	initConfig()
 
 	-- love.window.setFullscreen(config["fullscreen"])
-	if config.secret then playSE("welcome") end
+	-- if config.secret then playSE("welcome") end
+	playSE("welcome") -- trololo
 
 	-- import custom modules
 	initModules()
+
+	
 end
 
 
@@ -61,38 +64,46 @@ function initModules()
 	return tostring(a.name):gsub("%d+",padnum) < tostring(b.name):gsub("%d+",padnum) end)
 end
 
-function love.draw()
-	love.graphics.setCanvas(GLOBAL_CANVAS)
-	love.graphics.clear()
-
-	love.graphics.push()
-
-	-- get offset matrix
-	local width = love.graphics.getWidth()
-	local height = love.graphics.getHeight()
-	local scale_factor = math.min(width / 640, height / 480)
-	love.graphics.translate(
-		(width - scale_factor * 640) / 2,
-		(height - scale_factor * 480) / 2
-	)
-	love.graphics.scale(scale_factor)
-		
-	scene:render()
-
-	if config.gamesettings.display_gamemode == 1 or scene.title == "Title" then
+function love.draw(screen)
+	if screen == "bottom" then
+		love.graphics.setCanvas()
 		love.graphics.setFont(font_3x5_2)
 		love.graphics.setColor(1, 1, 1, 1)
-		love.graphics.printf(
-			string.format("%.2f", 1.0 / love.timer.getAverageDelta()) ..
-			"fps - " .. version, 0, 460, 635, "right"
+		love.graphics.printf("< > /\\ \\/", 0, 0, 635, "left")
+
+	else
+		love.graphics.setCanvas(GLOBAL_CANVAS)
+		love.graphics.clear()
+
+		love.graphics.push()
+
+		-- get offset matrix
+		local width = love.graphics.getWidth()
+		local height = love.graphics.getHeight()
+		local scale_factor = math.min(width / 640, height / 480)
+		love.graphics.translate(
+			(width - scale_factor * 640) / 2,
+			(height - scale_factor * 480) / 2
 		)
-	end
-	
-	love.graphics.pop()
+		love.graphics.scale(scale_factor)
+			
+		scene:render()
+
+		if config.gamesettings.display_gamemode == 1 or scene.title == "Title" then
+			love.graphics.setFont(font_3x5_2)
+			love.graphics.setColor(1, 1, 1, 1)
+			love.graphics.printf(
+				string.format("%.2f", 1.0 / love.timer.getAverageDelta()) ..
+				"fps - " .. version, 0, 460, 635, "right"
+			)
+		end
 		
-	love.graphics.setCanvas()
-	love.graphics.setColor(1,1,1,1)
-	love.graphics.draw(GLOBAL_CANVAS)
+		love.graphics.pop()
+			
+		love.graphics.setCanvas()
+		love.graphics.setColor(1,1,1,1)
+		love.graphics.draw(GLOBAL_CANVAS)
+	end
 end
 
 function love.keypressed(key, scancode)
@@ -278,6 +289,28 @@ function love.wheelmoved(x, y)
 	scene:onInputPress({input=nil, type="wheel", x=x, y=y})
 end
 
+function love.touchpressed(id, x, y, dx, dy, pressure)
+	local scancode = "tab"
+	local key = "tab"
+
+	local input_pressed = nil
+	if config.input and config.input.keys then
+		input_pressed = config.input.keys[scancode]
+	end
+	scene:onInputPress({input=input_pressed, type="key", key=key, scancode=scancode})
+end
+
+function love.touchreleased(id, x, y, dx, dy, pressure)
+	local scancode = "tab"
+	local key = "tab"
+
+	local input_released = nil
+	if config.input and config.input.keys then
+		input_released = config.input.keys[scancode]
+	end
+	scene:onInputRelease({input=input_released, type="key", key=key, scancode=scancode})
+end
+
 function love.focus(f)
 	if f then
 		resumeBGM(true)
@@ -297,9 +330,21 @@ local FRAME_DURATION = 1.0 / TARGET_FPS
 function love.run()
 	if love.load then love.load(love.arg.parseGameArguments(arg), arg) end
 
-	if love.timer then love.timer.step() end
+	-- if love.timer then love.timer.step() end
 
 	local dt = 0
+
+	if love.timer then
+		dt = love.timer.step()
+	end
+
+	-- 3DS STUFF
+	local normalScreens = love.graphics.getScreens()
+	local plainScreens
+	if love._console_name == "3DS" then
+		plainScreens = {"top", "bottom"}
+	end
+	--
 
 	local last_time = love.timer.getTime()
 	local time_accumulator = 0.0
@@ -325,9 +370,24 @@ function love.run()
 
 			if time_accumulator < FRAME_DURATION then
 				if love.graphics and love.graphics.isActive() and love.draw then
-					love.graphics.origin()
-					love.graphics.clear(love.graphics.getBackgroundColor())
-					love.draw()
+					-- love.graphics.origin()
+					-- love.graphics.clear(love.graphics.getBackgroundColor())
+					-- love.draw()
+					-- love.graphics.present()
+
+					local screens = love.graphics.get3D() and normalScreens or plainScreens
+
+					for _, screen in ipairs(screens) do
+						love.graphics.origin()
+
+						love.graphics.setActiveScreen(screen)
+						love.graphics.clear(love.graphics.getBackgroundColor())
+
+						if love.draw then
+							love.draw(screen)
+						end
+					end
+
 					love.graphics.present()
 				end
 
