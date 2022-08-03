@@ -73,10 +73,11 @@ local block_offsets = {
 function TitleScene:render()
 	love.graphics.setFont(font_3x5_4)
 	love.graphics.setColor(1, 1, 1, 1 - self.snow_bg_opacity)
+
 	love.graphics.draw(
-		backgrounds["title_no_icon"], -- title, title_night
-		0, 0, 0,
-		0.5, 0.5
+		backgrounds["title_no_icon"],
+		-80, 0, 0,
+		2, 2
 	)
 
 	-- 490, 192
@@ -97,30 +98,30 @@ function TitleScene:render()
 	]]
 	--love.graphics.printf("Thanks for 1 year!", 430, 280, 160, "center")
 
-	love.graphics.setFont(font_3x5_2)
-	love.graphics.setColor(1, 1, 1, self.snow_bg_opacity)
-	love.graphics.draw(
-		backgrounds["snow"],
-		0, 0, 0,
-		0.5, 0.5
-	)
+	love.graphics.setFont(font_3x5_3)
+	-- love.graphics.setColor(1, 1, 1, self.snow_bg_opacity)
+	-- love.graphics.draw(
+	-- 	backgrounds["snow"],
+	-- 	0, 0, 0,
+	-- 	0.5, 0.5
+	-- )
 
-	love.graphics.draw(
-		misc_graphics["santa"],
-		400, -205 + self.y_offset,
-		0, 0.5, 0.5
-	)
-	love.graphics.print("Happy Holidays!", 320, -100 + self.y_offset)
+	-- love.graphics.draw(
+	-- 	misc_graphics["santa"],
+	-- 	400, -205 + self.y_offset,
+	-- 	0, 0.5, 0.5
+	-- )
+	-- love.graphics.print("Happy Holidays!", 320, -100 + self.y_offset)
 
 	love.graphics.setColor(1, 1, 1, 1)
 	love.graphics.print(self.restart_message and "Restart Cambridge..." or "", 0, 0)
 
-	love.graphics.setColor(1, 1, 1, 0.5)
-	love.graphics.rectangle("fill", 20, 278 + 20 * self.main_menu_state, 160, 22)
+	love.graphics.setColor(0, 0, 0, 0.75)
+	love.graphics.rectangle("fill", 20, 278 + 32 * self.main_menu_state, 160, 34)
 
 	love.graphics.setColor(1, 1, 1, 1)
 	for i, screen in pairs(main_menu_screens) do
-		love.graphics.printf(screen.title, 40, 280 + 20 * i, 120, "left")
+		love.graphics.printf(screen.title, 40, 280 + 32 * i, 120, "left")
 	end
 end
 

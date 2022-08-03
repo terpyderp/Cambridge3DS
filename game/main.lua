@@ -77,7 +77,7 @@ function love.draw(screen)
 	if screen == "bottom" then
 		if scene.title ~= "Game" then
 			love.graphics.setCanvas()
-			love.graphics.setFont(font_3x5_2)
+			love.graphics.setFont(font_3x5)
 			-- love.graphics.setColor(1, 1, 1, 1)
 			-- love.graphics.printf("< > /\\ \\/", 0, 0, 635, "left")
 
@@ -85,7 +85,7 @@ function love.draw(screen)
 				love.graphics.setColor(b[5], b[6], b[7])
 				love.graphics.setLineWidth(2)
 				love.graphics.rectangle("line", b[1], b[2], b[3], b[4])
-				love.graphics.printf(b[8], b[1]+6, b[2]+2, b[3], "left")
+				love.graphics.printf(b[8], b[1]+6, b[2], b[3], "left")
 			end
 		end
 		

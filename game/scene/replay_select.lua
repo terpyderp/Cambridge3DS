@@ -76,8 +76,8 @@ end
 function ReplaySelectScene:render()
 	love.graphics.draw(
 		backgrounds[0],
-		0, 0, 0,
-		0.5, 0.5
+		-80, 0, 0,
+		2, 2
 	)
 
 	-- Same graphic as mode select

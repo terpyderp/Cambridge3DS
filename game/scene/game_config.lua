@@ -47,8 +47,8 @@ function ConfigScene:render()
 	love.graphics.setColor(1, 1, 1, 1)
 	love.graphics.draw(
 		backgrounds["game_config"],
-		0, 0, 0,
-		0.5, 0.5
+		-80, 0, 0,
+		2, 2
 	)
 
 	love.graphics.setFont(font_3x5_4)

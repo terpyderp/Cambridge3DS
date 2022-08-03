@@ -60,8 +60,8 @@ end
 function ModeSelectScene:render()
 	love.graphics.draw(
 		backgrounds[0],
-		0, 0, 0,
-		0.5, 0.5
+		-80, 0, 0,
+		2, 2
 	)
 
 	love.graphics.draw(misc_graphics["select_mode"], 20, 40)

@@ -977,12 +977,12 @@ function GameMode:drawSectionTimesWithSplits(current_section, section_limit)
 end
 
 function GameMode:drawBackground()
-	love.graphics.setColor(1, 1, 1, 1)
-	love.graphics.draw(
-		backgrounds[self:getBackground()],
-		0, 0, 0,
-		0.5, 0.5
-	)
+	-- love.graphics.setColor(1, 1, 1, 1)
+	-- love.graphics.draw(
+	-- 	backgrounds[self:getBackground()],
+	-- 	0, 0, 0,
+	-- 	0.5, 0.5
+	-- )
 end
 
 function GameMode:drawFrame()

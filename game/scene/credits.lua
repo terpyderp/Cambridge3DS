@@ -33,9 +33,9 @@ function CreditsScene:render()
 
     love.graphics.setColor(1, 1, 1, 1)
 	love.graphics.draw(
-		backgrounds[19],
-		0, 0, 0,
-		0.5, 0.5
+        backgrounds[0],
+        -80, 0, 0,
+        2, 2
     )
 
     love.graphics.setFont(font_3x5_4)
