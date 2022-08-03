@@ -116,12 +116,12 @@ function TitleScene:render()
 	love.graphics.setColor(1, 1, 1, 1)
 	love.graphics.print(self.restart_message and "Restart Cambridge..." or "", 0, 0)
 
-	love.graphics.setColor(0, 0, 0, 0.75)
-	love.graphics.rectangle("fill", 20, 278 + 32 * self.main_menu_state, 160, 34)
+	love.graphics.setColor(0, 0, 0, 0.5)
+	love.graphics.rectangle("fill", 20, 278 + 32 * self.main_menu_state, 200, 34)
 
 	love.graphics.setColor(1, 1, 1, 1)
 	for i, screen in pairs(main_menu_screens) do
-		love.graphics.printf(screen.title, 40, 280 + 32 * i, 120, "left")
+		love.graphics.printf(screen.title, 40, 280 + 32 * i, 160, "left")
 	end
 end
 

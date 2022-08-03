@@ -75,12 +75,10 @@ end
 
 function love.draw(screen)
 	if screen == "bottom" then
+		love.graphics.setCanvas()
+		love.graphics.setFont(font_3x5)
+		
 		if scene.title ~= "Game" then
-			love.graphics.setCanvas()
-			love.graphics.setFont(font_3x5)
-			-- love.graphics.setColor(1, 1, 1, 1)
-			-- love.graphics.printf("< > /\\ \\/", 0, 0, 635, "left")
-
 			for _, b in ipairs(touchButtons) do
 				love.graphics.setColor(b[5], b[6], b[7])
 				love.graphics.setLineWidth(2)
@@ -88,6 +86,12 @@ function love.draw(screen)
 				love.graphics.printf(b[8], b[1]+6, b[2], b[3], "left")
 			end
 		end
+
+		love.graphics.setColor(1, 1, 1, 1)
+		love.graphics.printf(
+			version .. " - FPS:" .. (1.0 / love.timer.getAverageDelta()),
+			0, 0, 320, "left"
+		)
 		
 		love.graphics.setColor(1, 1, 1, 1)
 
@@ -109,14 +113,14 @@ function love.draw(screen)
 			
 		scene:render()
 
-		if config.gamesettings.display_gamemode == 1 or scene.title == "Title" then
-			love.graphics.setFont(font_3x5_2)
-			love.graphics.setColor(1, 1, 1, 1)
-			love.graphics.printf(
-				string.format("%.2f", 1.0 / love.timer.getAverageDelta()) ..
-				"fps - " .. version, 0, 460, 635, "right"
-			)
-		end
+		-- if config.gamesettings.display_gamemode == 1 or scene.title == "Title" then
+		-- 	love.graphics.setFont(font_3x5_2)
+		-- 	love.graphics.setColor(1, 1, 1, 1)
+		-- 	love.graphics.printf(
+		-- 		string.format("%.2f", 1.0 / love.timer.getAverageDelta()) ..
+		-- 		"fps - " .. version, 0, 460, 635, "right"
+		-- 	)
+		-- end
 		
 		love.graphics.pop()
 			
