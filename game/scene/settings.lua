@@ -8,13 +8,13 @@ local menu_screens = {
     TuningScene
 }
 
-local settingsidle = {
-  "Tweaking some knobs",
-  "Tuning up",
-  "Adjusting options",
-  "Setting up",
-  "Setting the settings"
-}
+-- local settingsidle = {
+--   "Tweaking some knobs",
+--   "Tuning up",
+--   "Adjusting options",
+--   "Setting up",
+--   "Setting the settings"
+-- }
 
 function SettingsScene:new()
     self.menu_state = 1
@@ -28,20 +28,21 @@ end
 function SettingsScene:update() end
 
 function SettingsScene:render()
-    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.setColor(.75, .75, .75, 1)
     love.graphics.draw(
 		backgrounds["game_config"],
 		-80, 0, 0,
 		2, 2
 	)
 
+    love.graphics.setColor(1, 1, 1, 1)
     love.graphics.setFont(font_3x5_4)
     love.graphics.print("SETTINGS", 80, 40)
 
     love.graphics.setFont(font_3x5_2)
     love.graphics.print("Here, you can change some settings that change\nthe look and feel of the game.", 80, 90)
 
-    love.graphics.setColor(1, 1, 1, 0.5)
+    love.graphics.setColor(0, 0, 0, 0.75)
 	love.graphics.rectangle("fill", 75, 118 + 50 * self.menu_state, 200, 33)
 
     love.graphics.setFont(font_3x5_3)

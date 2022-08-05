@@ -45,13 +45,14 @@ function StickConfigScene:update()
 end
 
 function StickConfigScene:render()
-	love.graphics.setColor(1, 1, 1, 1)
+	love.graphics.setColor(.75, .75, .75, 1)
 	love.graphics.draw(
 		backgrounds["input_config"],
 		-80, 0, 0,
 		2, 2
 	)
 
+	love.graphics.setColor(1, 1, 1, 1)
 	love.graphics.setFont(font_3x5_2)
 	for i, input in ipairs(configurable_inputs) do
 		love.graphics.printf(input, 40, 50 + i * 20, 200, "left")

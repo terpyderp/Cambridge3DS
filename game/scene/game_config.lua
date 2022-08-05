@@ -8,17 +8,17 @@ require 'libs.simple-slider'
 ConfigScene.options = {
 	-- this serves as reference to what the options' values mean i guess?
 	-- Format: {name in config, displayed name, uses slider?, options OR slider name}
-	{"manlock", "Manual Locking", false, {"Per ruleset", "Per gamemode", "Harddrop", "Softdrop"}},
-	{"piece_colour", "Piece Colours", false, {"Per ruleset", "Arika", "TTC"}},
+	{"manlock", "Man Lock", false, {"Ruleset", "Gamemode", "Harddrop", "Softdrop"}},
+	{"piece_colour", "Piece Colours", false, {"Ruleset", "Arika", "TTC"}},
 	{"world_reverse", "A Button Rotation", false, {"Left", "Auto", "Right"}},
-	{"spawn_positions", "Spawn Positions", false, {"Per ruleset", "In field", "Out of field"}},
+	{"spawn_positions", "Spawn Positions", false, {"Ruleset", "Inside", "Outside"}},
 	{"display_gamemode", "Debug Info", false, {"On", "Off"}},
 	{"save_replay", "Save Replays", false, {"On", "Off"}},
 	{"smooth_movement", "Smooth Piece Drop", false, {"On", "Off"}},
 	{"diagonal_input", "Diagonal Input", false, {"On", "Off"}},
 	{"das_last_key", "DAS Last Key", false, {"Off", "On"}},
 	{"buffer_lock", "Buffer Drop Type", false, {"Off", "Hold", "Tap"}},
-	{"synchroes_allowed", "Synchroes", false, {"Per ruleset", "On", "Off"}},
+	{"synchroes_allowed", "Synchroes", false, {"Ruleset", "On", "Off"}},
 	{"sfx_volume", "SFX", true, "sfxSlider"},
 	{"bgm_volume", "BGM", true, "bgmSlider"},
 }
@@ -44,20 +44,21 @@ function ConfigScene:update()
 end
 
 function ConfigScene:render()
-	love.graphics.setColor(1, 1, 1, 1)
+	love.graphics.setColor(.75, .75, .75, 1)
 	love.graphics.draw(
 		backgrounds["game_config"],
 		-80, 0, 0,
 		2, 2
 	)
 
+	love.graphics.setColor(1, 1, 1, 1)
 	love.graphics.setFont(font_3x5_4)
 	love.graphics.print("GAME SETTINGS", 80, 40)
 
 	--Lazy check to see if we're on the SFX or BGM slider. Probably will need to be rewritten if more options get added.
-	love.graphics.setColor(1, 1, 1, 0.5)
+	love.graphics.setColor(0, 0, 0, 0.75)
 	if not ConfigScene.options[self.highlight][3] then
-		love.graphics.rectangle("fill", 25, 98 + self.highlight * 20, 170, 22)
+		love.graphics.rectangle("fill", 25, 98 + self.highlight * 20, 200, 22)
 	else
 		love.graphics.rectangle("fill", 65 + (1+self.highlight-#self.options) * 300, 362, 215, 33)
 	end
@@ -66,10 +67,10 @@ function ConfigScene:render()
 	for i, option in ipairs(ConfigScene.options) do
 		if not option[3] then
 			love.graphics.setColor(1, 1, 1, 1)
-			love.graphics.printf(option[2], 40, 100 + i * 20, 150, "left")
+			love.graphics.printf(option[2], 40, 95 + i * 20, 200, "left")
 			for j, setting in ipairs(option[4]) do
 				love.graphics.setColor(1, 1, 1, config.gamesettings[option[1]] == j and 1 or 0.5)
-				love.graphics.printf(setting, 100 + 110 * j, 100 + i * 20, 100, "center")
+				love.graphics.printf(setting, 100 + 110 * j, 95 + i * 20, 200, "center")
 			end
 		end
 	end

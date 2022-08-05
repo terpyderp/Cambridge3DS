@@ -3,7 +3,7 @@ local ConfigScene = Scene:extend()
 ConfigScene.title = "Input Config"
 
 local menu_screens = {
-	KeyConfigScene,
+	-- KeyConfigScene,
 	StickConfigScene
 }
 
@@ -19,20 +19,21 @@ end
 function ConfigScene:update() end
 
 function ConfigScene:render()
-	love.graphics.setColor(1, 1, 1, 1)
+	love.graphics.setColor(.75, .75, .75, 1)
 	love.graphics.draw(
 		backgrounds["input_config"],
 		-80, 0, 0,
 		2, 2
 	)
 
+	love.graphics.setColor(1, 1, 1, 1)
 	love.graphics.setFont(font_3x5_4)
 	love.graphics.print("INPUT CONFIG", 80, 40)
 
 	love.graphics.setFont(font_3x5_2)
 	love.graphics.print("Which controls do you want to configure?", 80, 90)
 
-	love.graphics.setColor(1, 1, 1, 0.5)
+	love.graphics.setColor(0, 0, 0, 0.75)
 	love.graphics.rectangle("fill", 75, 118 + 50 * self.menu_state, 200, 33)
 
 	love.graphics.setFont(font_3x5_3)

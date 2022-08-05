@@ -5,35 +5,35 @@ TitleScene.restart_message = false
 
 local main_menu_screens = {
 	ModeSelectScene,
-	ReplaySelectScene,
+	-- ReplaySelectScene,
 	SettingsScene,
 	CreditsScene,
 	ExitScene,
 }
 
-local mainmenuidle = {
-	"Idle",
-	"On title screen",
-	"On main menu screen",
-	"Twiddling their thumbs",
-	"Admiring the main menu's BG",
-	"Waiting for spring to come",
-	"Actually not playing",
-	"Contemplating collecting stars",
-	"Preparing to put the block!!",
-	"Having a nap",
-	"In menus",
-	"Bottom text",
-	"Trying to see all the funny rpc messages (maybe)",
-	"Not not not playing",
-	"AFK",
-	"Preparing for their next game",
-	"Who are those people on that boat?",
-	"Welcome to Cambridge!",
-	"who even reads these",
-	"Made with love in LOVE!",
-	"This is probably the longest RPC string out of every possible RPC string that can be displayed."
-}
+-- local mainmenuidle = {
+-- 	"Idle",
+-- 	"On title screen",
+-- 	"On main menu screen",
+-- 	"Twiddling their thumbs",
+-- 	"Admiring the main menu's BG",
+-- 	"Waiting for spring to come",
+-- 	"Actually not playing",
+-- 	"Contemplating collecting stars",
+-- 	"Preparing to put the block!!",
+-- 	"Having a nap",
+-- 	"In menus",
+-- 	"Bottom text",
+-- 	"Trying to see all the funny rpc messages (maybe)",
+-- 	"Not not not playing",
+-- 	"AFK",
+-- 	"Preparing for their next game",
+-- 	"Who are those people on that boat?",
+-- 	"Welcome to Cambridge!",
+-- 	"who even reads these",
+-- 	"Made with love in LOVE!",
+-- 	"This is probably the longest RPC string out of every possible RPC string that can be displayed."
+-- }
 
 function TitleScene:new()
 	self.main_menu_state = 1

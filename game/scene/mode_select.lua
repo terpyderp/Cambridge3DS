@@ -82,16 +82,16 @@ function ModeSelectScene:render()
 	end
 
 	if self.menu_state.select == "mode" then
-		love.graphics.setColor(1, 1, 1, 0.5)
+		love.graphics.setColor(0, 0, 0, 1)
 	elseif self.menu_state.select == "ruleset" then
-		love.graphics.setColor(1, 1, 1, 0.25)
+		love.graphics.setColor(0, 0, 0, 0.5)
 	end
 	love.graphics.rectangle("fill", 20, 258, 240, 22)
 
 	if self.menu_state.select == "mode" then
-		love.graphics.setColor(1, 1, 1, 0.25)
+		love.graphics.setColor(0, 0, 0, 0.5)
 	elseif self.menu_state.select == "ruleset" then
-		love.graphics.setColor(1, 1, 1, 0.5)
+		love.graphics.setColor(0, 0, 0, 1)
 	end
 	love.graphics.rectangle("fill", 340, 258, 200, 22)
 
@@ -100,12 +100,12 @@ function ModeSelectScene:render()
 	love.graphics.setFont(font_3x5_2)
 	for idx, mode in pairs(game_modes) do
 		if(idx >= self.menu_state.mode-9 and idx <= self.menu_state.mode+9) then
-			love.graphics.printf(mode.name, 40, (260 - 20*(self.menu_state.mode)) + 20 * idx, 200, "left")
+			love.graphics.printf(mode.name, 40, (255 - 20*(self.menu_state.mode)) + 20 * idx, 200, "left")
 		end
 	end
 	for idx, ruleset in pairs(rulesets) do
 		if(idx >= self.menu_state.ruleset-9 and idx <= self.menu_state.ruleset+9) then
-			love.graphics.printf(ruleset.name, 360, (260 - 20*(self.menu_state.ruleset)) + 20 * idx, 160, "left")
+			love.graphics.printf(ruleset.name, 360, (255 - 20*(self.menu_state.ruleset)) + 20 * idx, 160, "left")
 		end
 	end
 end
