@@ -138,15 +138,15 @@ function SurvivalAXGame:drawScoringInfo()
 		strTrueValues(self.prev_inputs)
 	)
 	love.graphics.printf("NEXT", 64, 40, 40, "left")
-	if self.lines < 150 then love.graphics.printf("TIME LEFT", 240, 250, 80, "left") end
+	if self.lines < 150 then love.graphics.printf("TIME LEFT", 240, 250, 300, "left") end
 	love.graphics.printf("LINES", 240, 320, 40, "left")
 
 	local current_section = math.floor(self.lines / 10) + 1
 	self:drawSectionTimesWithSplits(current_section)
 
 	love.graphics.setFont(font_3x5_3)
-	love.graphics.printf(self.lines, 240, 340, 40, "right")
-	love.graphics.printf(self.clear and self.lines or self:getSectionEndLines(), 240, 370, 40, "right")
+	love.graphics.printf(self.lines, 300, 340, 40, "right")
+	love.graphics.printf(self.clear and self.lines or self:getSectionEndLines(), 300, 370, 40, "right")
 
 	-- draw time left, flash red if necessary
 	local time_left = self.section_time_limit - math.max(self:getSectionTime(), 0)

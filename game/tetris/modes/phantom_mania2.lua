@@ -310,19 +310,19 @@ function PhantomMania2Game:drawScoringInfo()
 
 	self:drawSectionTimesWithSplits(math.floor(self.level / 100) + 1)
 
-	if(self.coolregret_timer > 0) then
-				love.graphics.printf(self.coolregret_message, 64, 400, 160, "center")
-				self.coolregret_timer = self.coolregret_timer - 1
-		end
+	if self.coolregret_timer > 0 then
+		love.graphics.printf(self.coolregret_message, 64, 400, 160, "center")
+		self.coolregret_timer = self.coolregret_timer - 1
+	end
 
 	love.graphics.setFont(font_3x5_3)
 	love.graphics.printf(getLetterGrade(math.floor(self.grade)), text_x, 140, 90, "left")
 	love.graphics.printf(self.score, text_x, 220, 90, "left")
-	love.graphics.printf(self.level, text_x, 340, 50, "right")
+	love.graphics.printf(self.level, text_x+80, 340, 50, "right")
 	if self.clear then
-		love.graphics.printf(self.level, text_x, 370, 50, "right")
+		love.graphics.printf(self.level, text_x+80, 370, 50, "right")
 	else
-		love.graphics.printf(math.floor(self.level / 100 + 1) * 100, text_x, 370, 50, "right")
+		love.graphics.printf(math.floor(self.level / 100 + 1) * 100, text_x+80, 370, 50, "right")
 	end
 	
 	if sg >= 5 then

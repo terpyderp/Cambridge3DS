@@ -375,8 +375,8 @@ function MarathonA2Game:drawScoringInfo()
 	love.graphics.printf(self:getLetterGrade(), 240, 140, 90, "left")
 	love.graphics.setColor(1, 1, 1, 1)
 	love.graphics.printf(self.score, 240, 220, 90, "left")
-	love.graphics.printf(self.level, 240, 340, 40, "right")
-	love.graphics.printf(self:getSectionEndLevel(), 240, 370, 40, "right")
+	love.graphics.printf(self.level, 300, 340, 40, "right")
+	love.graphics.printf(self:getSectionEndLevel(), 300, 370, 40, "right")
 	if sg >= 5 then
 		love.graphics.printf(self.SGnames[sg], 240, 450, 180, "left")
 	end

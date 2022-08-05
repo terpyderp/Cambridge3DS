@@ -57,7 +57,7 @@ function StickConfigScene:render()
 	for i, input in ipairs(configurable_inputs) do
 		love.graphics.printf(input, 40, 50 + i * 20, 200, "left")
 		if self.set_inputs[input] then
-			love.graphics.printf(self.set_inputs[input], 240, 50 + i * 20, 300, "left")
+			love.graphics.printf(self.set_inputs[input], 240, 50 + i * 20, 500, "left")
 		end
 	end
 	if self.input_state > table.getn(configurable_inputs) then

@@ -160,8 +160,8 @@ function SurvivalA2Game:drawScoringInfo()
 	love.graphics.printf(self.score, text_x, 220, 90, "left")
 	if self:getLetterGrade() ~= "" then love.graphics.printf(self:getLetterGrade(), text_x, 140, 90, "left") end
 	love.graphics.setColor(1, 1, 1, 1)
-	love.graphics.printf(self.level, text_x, 340, 40, "right")
-	love.graphics.printf(self:getSectionEndLevel(), text_x, 370, 40, "right")
+	love.graphics.printf(self.level, text_x+80, 340, 40, "right")
+	love.graphics.printf(self:getSectionEndLevel(), text_x+80, 370, 40, "right")
 	if sg >= 5 then
 		love.graphics.printf(self.SGnames[sg], 240, 450, 180, "left")
 	end

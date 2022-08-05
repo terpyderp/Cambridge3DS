@@ -201,7 +201,7 @@ function MarathonA1Game:drawScoringInfo()
 	love.graphics.printf("NEXT", 64, 40, 40, "left")
 	love.graphics.printf("GRADE", 240, 120, 40, "left")
 	love.graphics.printf("SCORE", 240, 200, 40, "left")
-	love.graphics.printf("NEXT RANK", 240, 260, 90, "left")
+	love.graphics.printf("NEXT RANK", 240, 260, 300, "left")
 	love.graphics.printf("LEVEL", 240, 320, 40, "left")
 	local sg = self.grid:checkSecretGrade()
 	if sg >= 5 then 
@@ -218,8 +218,8 @@ function MarathonA1Game:drawScoringInfo()
 		love.graphics.printf(getRankForScore(self.score).rank, 240, 140, 90, "left")
 	end
 	love.graphics.printf(getRankForScore(self.score).next, 240, 280, 90, "left")
-	love.graphics.printf(self.level, 240, 340, 40, "right")
-	love.graphics.printf(self:getSectionEndLevel(), 240, 370, 40, "right")
+	love.graphics.printf(self.level, 300, 340, 40, "right")
+	love.graphics.printf(self:getSectionEndLevel(), 300, 370, 40, "right")
 	if sg >= 5 then
 		love.graphics.printf(self.SGnames[sg], 240, 450, 180, "left")
 	end

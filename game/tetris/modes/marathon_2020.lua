@@ -446,7 +446,7 @@ function Marathon2020Game:drawScoringInfo()
 
 	love.graphics.setFont(font_3x5_2)
 	love.graphics.printf("GRADE", text_x, 100, 40, "left")
-	love.graphics.printf("GRADE PTS.", text_x, 200, 90, "left")
+	love.graphics.printf("GRADE PTS.", text_x, 200, 200, "left")
 	love.graphics.printf("LEVEL", text_x, 320, 40, "left")
 
 	self:drawSectionTimesWithSecondary(current_section, 20)
@@ -465,12 +465,12 @@ function Marathon2020Game:drawScoringInfo()
 	)
 
 	love.graphics.printf(self.grade_points, text_x, 220, 90, "left")
-	love.graphics.printf(self.level, text_x, 340, 50, "right")
+	love.graphics.printf(self.level, text_x+80, 340, 50, "right")
 
 	if self.clear then
-		love.graphics.printf(self.level, text_x, 370, 50, "right")
+		love.graphics.printf(self.level, text_x+80, 370, 50, "right")
 	else
-		love.graphics.printf(self:getEndOfSectionForSection(current_section), text_x, 370, 50, "right")
+		love.graphics.printf(self:getEndOfSectionForSection(current_section), text_x+80, 370, 50, "right")
 	end
 
 end

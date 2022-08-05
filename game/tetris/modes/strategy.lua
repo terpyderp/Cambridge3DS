@@ -126,11 +126,11 @@ function StrategyGame:drawScoringInfo()
 
 	love.graphics.setFont(font_3x5_3)
 	love.graphics.printf(self.score, text_x, 220, 90, "left")
-	love.graphics.printf(self.level, text_x, 340, 40, "right")
+	love.graphics.printf(self.level, text_x+80, 340, 40, "right")
 	if self.clear then
-		love.graphics.printf(self.level, text_x, 370, 40, "right")
+		love.graphics.printf(self.level, text_x+80, 370, 40, "right")
 	else
-		love.graphics.printf(self.level < 900 and math.floor(self.level / 100 + 1) * 100 or 999, text_x, 370, 40, "right")
+		love.graphics.printf(self.level < 900 and math.floor(self.level / 100 + 1) * 100 or 999, text_x+80, 370, 40, "right")
 	end
 end
 
