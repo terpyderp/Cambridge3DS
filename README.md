@@ -1,5 +1,5 @@
 # Cambridge3DS
-3DS port of Cambridge, the open-source arcade stacker. Consider this a fork of https://github.com/MillaBasset/cambridge
+3DS port of Cambridge, the open-source arcade stacker. Consider this a fork of https://github.com/Rexxt/cambridge
 
 ## Known Issues
 (I don't know how to fix these, or I'm too lazy)
